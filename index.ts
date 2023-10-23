@@ -33,6 +33,8 @@ app.post("/", async (req: Request, res: Response) => {
   }
 });
 
+export default app;
+
 app.listen(3001, () => {
   console.log("Listening on http://localhost:3001");
 });
