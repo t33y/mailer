@@ -36,6 +36,5 @@ app.post("/", async (req: Request, res: Response) => {
 export default app;
 
 app.listen(3001, () => {
-  console.log("not listening", process.env.RESEND_API_KEY);
   console.log("Listening on http://localhost:3001");
 });
