@@ -24,11 +24,9 @@ app.post("/", async (req: Request, res: Response) => {
       html: `<strong>${req.body.message}</strong>`,
       reply_to: req.body.email,
     });
-    console.log("body", req.body);
-    console.log("body", res.statusCode);
+
     res.status(200).json({ data });
   } catch (error) {
-    console.log(error);
     res.status(500).send(error);
   }
 });
