@@ -31,8 +31,24 @@ app.post("/", async (req: Request, res: Response) => {
   }
 });
 
-export default app;
+app.post("/region", async (req: Request, res: Response) => {
+  try {
+    const response = await fetch(
+      `http://www.geoplugin.net/extras/location.gp?lat=${req.body.lat}&lon=${req.body.lon}`
+    );
+    if (!response.ok) {
+      res.status(response.status).json({ error: "Failed to fetch region" });
+      return;
+    }
+    const region = await response.json();
+    const countryCode = region.geoplugin_countryCode;
 
-// app.listen(3001, () => {
-//   console.log("Listening on http://localhost:3001");
-// });
+    res.status(200).json({ countryCode });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ error: "Internal Server Error", details: error.message });
+  }
+});
+
+export default app;
