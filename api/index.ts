@@ -32,7 +32,7 @@ app.post("/", async (req: Request, res: Response) => {
 });
 
 app.post("/region", async (req: Request, res: Response) => {
-  console.log(process.version);
+  console.log("version", process.version);
   try {
     const response = await fetch(
       `http://www.geoplugin.net/extras/location.gp?lat=${req.body.lat}&lon=${req.body.lon}`
@@ -46,6 +46,7 @@ app.post("/region", async (req: Request, res: Response) => {
 
     res.status(200).json({ countryCode });
   } catch (error) {
+    console.log("error from fetch", error);
     res
       .status(500)
       .send({ error: "Internal Server Error", details: error.message });
