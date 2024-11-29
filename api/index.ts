@@ -12,6 +12,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const corsOptions = {
   origin: "*",
+  "Access-Control-Allow-Origin": "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  "Access-Control-Allow-Headers": ["Content-Type", "Authorization"],
 };
 app.use(cors(corsOptions));
 
