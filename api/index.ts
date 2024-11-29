@@ -40,7 +40,7 @@ app.post("/region", async (req: Request, res: Response) => {
   console.log("lat", req.body.lat);
   try {
     const response = await fetch(
-      `http://www.geoplugin.net/extras/location.gp?lat=${req.body.lat}&lon=${req.body.lon}`
+      `http://www.geoplugin.net/extras/location.gp?lat=${req.body.lat}&lon=${req.body.lon}&format=json`
     );
     if (!response.ok) {
       res.status(response.status).json({ error: "Failed to fetch region" });
