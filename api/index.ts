@@ -47,16 +47,18 @@ app.post("/region", async (req: Request, res: Response) => {
       return;
     }
     const contentType = response.headers.get("Content-Type");
-    if (contentType && contentType.indexOf("application/json") !== -1) {
-      const region = await response.json();
-      const countryCode = region.geoplugin_countryCode;
+    console.log("content type", contentType);
+    console.log("response", response);
+    // if (contentType && contentType.indexOf("application/json") !== -1) {
+    const region = await response.json();
+    const countryCode = region.geoplugin_countryCode;
 
-      res.status(200).json({ countryCode });
-    } else {
-      console.log("content type", contentType);
-      console.log("response", response);
-      res.status(300).send(response);
-    }
+    res.status(200).json({ countryCode });
+    // } else {
+    // console.log("content type", contentType);
+    // console.log("response", response);
+    // res.status(300).send(response);
+    // }
   } catch (error) {
     console.log("error from fetch", error);
     res
