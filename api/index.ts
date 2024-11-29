@@ -32,6 +32,7 @@ app.post("/", async (req: Request, res: Response) => {
 });
 
 app.post("/region", async (req: Request, res: Response) => {
+  console.log(process.version);
   try {
     const response = await fetch(
       `http://www.geoplugin.net/extras/location.gp?lat=${req.body.lat}&lon=${req.body.lon}`
