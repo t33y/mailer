@@ -52,8 +52,10 @@ app.post("/region", async (req: Request, res: Response) => {
     console.log("response", response);
     if (contentType?.includes("application/json")) {
       data = await response.json();
+      console.log("it is JSON");
     } else if (contentType?.includes("text/plain")) {
       const text = await response.text();
+      console.log("it is text");
       data = JSON.parse(text); // Parse plain text into JSON
     } else {
       throw new Error("Unexpected response format from GeoPlugin");
