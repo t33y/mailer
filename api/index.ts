@@ -53,6 +53,7 @@ app.post("/region", async (req: Request, res: Response) => {
     } else {
       console.log("content type", contentType);
       console.log("response", response);
+      res.status(300).send(response);
     }
   } catch (error) {
     console.log("error from fetch", error);
