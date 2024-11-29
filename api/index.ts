@@ -46,12 +46,21 @@ app.post("/region", async (req: Request, res: Response) => {
       res.status(response.status).json({ error: "Failed to fetch region" });
       return;
     }
+    let data: any;
     const contentType = response.headers.get("Content-Type");
     console.log("content type", contentType);
     console.log("response", response);
+    if (contentType?.includes("application/json")) {
+      data = await response.json();
+    } else if (contentType?.includes("text/plain")) {
+      const text = await response.text();
+      data = JSON.parse(text); // Parse plain text into JSON
+    } else {
+      throw new Error("Unexpected response format from GeoPlugin");
+    }
     // if (contentType && contentType.indexOf("application/json") !== -1) {
-    const region = await response.json();
-    const countryCode = region.geoplugin_countryCode;
+    // const region = await response.json();
+    const countryCode = data?.geoplugin_countryCode;
 
     res.status(200).json({ countryCode });
     // } else {
